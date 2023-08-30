@@ -1,14 +1,17 @@
-﻿using SQLite;
+﻿using BugTracker.Services;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
+using DependencyAttribute = Microsoft.Maui.Controls.DependencyAttribute;
 
+[assembly:Dependency(typeof(BugService))]
 namespace BugTracker.Services
 {
-    public class BugService
+    public class BugService : IBugService, IBugService
     {
         SQLiteAsyncConnection db;
 
@@ -25,9 +28,10 @@ namespace BugTracker.Services
             //Created both tables here
             await db.CreateTableAsync<Employee>();
             await db.CreateTableAsync<Ticket>();
+            await db.CreateTableAsync<Project>();
 
         }
-        
+
 
         //Tasks for employee table
         public async Task AddEmployee(Employee emp)
@@ -80,17 +84,47 @@ namespace BugTracker.Services
         {
             await Init();
 
-            var employee = await db.Table<Ticket>().ToListAsync();
-            return employee;
+            var ticket = await db.Table<Ticket>().ToListAsync();
+            return ticket;
         }
 
         public async Task<Ticket> GetTicket(int id)
         {
             await Init();
 
-            var employee = await db.Table<Ticket>().FirstOrDefaultAsync(e => e.Id == id);
-            return employee;
+            var ticket = await db.Table<Ticket>().FirstOrDefaultAsync(t => t.Id == id);
+            return ticket;
         }
 
+        //Task for Project Table
+        public async Task AddProject(Project proj)
+        {
+            await Init();
+
+            var id = await db.InsertAsync(proj);
+        }
+
+        public async Task RemoveProject(int id)
+        {
+            await Init();
+
+            await db.DeleteAsync<Project>(id);
+        }
+
+        public async Task<IEnumerable<Project>> GetProject()
+        {
+            await Init();
+
+            var project = await db.Table<Project>().ToListAsync();
+            return project;
+        }
+
+        public async Task<Project> GetProject(int id)
+        {
+            await Init();
+
+            var project = await db.Table<Project>().FirstOrDefaultAsync(p => p.Id == id);
+            return project;
+        }
     }
 }

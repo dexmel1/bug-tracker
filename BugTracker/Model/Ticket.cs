@@ -14,11 +14,12 @@ namespace BugTracker.Model
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public int Priority { get; set; }
-        public string Group { get; set; }
+        public string Status { get; set; }
+        public string AssignedTo { get; set; }
+        public string Project { get; set; }
 
     }
 }
