@@ -21,8 +21,3 @@ namespace BugTracker.Model
     }
 }
 
-[JsonSerializable(typeof(List<Employee>))]
-internal sealed partial class EmployeeContext : JsonSerializerContext
-{
-
-}

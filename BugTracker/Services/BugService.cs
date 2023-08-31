@@ -11,7 +11,7 @@ using DependencyAttribute = Microsoft.Maui.Controls.DependencyAttribute;
 [assembly:Dependency(typeof(BugService))]
 namespace BugTracker.Services
 {
-    public class BugService : IBugService, IBugService
+    public class BugService : IBugService
     {
         SQLiteAsyncConnection db;
 

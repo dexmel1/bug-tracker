@@ -24,8 +24,3 @@ namespace BugTracker.Model
     }
 }
 
-[JsonSerializable(typeof(List<Ticket>))]
-internal sealed partial class TicketContext : JsonSerializerContext
-{
-
-}
