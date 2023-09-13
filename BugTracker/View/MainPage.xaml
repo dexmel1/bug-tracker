@@ -1,48 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage x:Class="BugTracker.View.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:BugTracker.Model"
              xmlns:viewmodel="clr-namespace:BugTracker.ViewModel"
-             x:DataType="viewmodel:MainViewModel"
-             x:Class="BugTracker.MainPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             x:DataType="viewmodel:MainViewModel">
 
-    <Grid ColumnDefinitions="*,*"
-      ColumnSpacing="5"
-      RowDefinitions="*,Auto">
-        <VerticalStackLayout Grid.ColumnSpan="2">
-            <Label Text="Project Status"
-                   FontSize="Large"
-                   TextColor="White"
-                   VerticalTextAlignment="Center"
-                   BackgroundColor="{StaticResource Primary}"
-                   HorizontalOptions="Center"
-                   HeightRequest="100"/>
-            
-            <Label Text="Ticket status"
-                   FontSize="Large"
-                   TextColor="White"
-                   VerticalTextAlignment="Center"
-                   BackgroundColor="{StaticResource Primary}"
-                   HorizontalOptions="Center"
-                   HeightRequest="100"/>
-            
-            <Label Text="employee status"
-                   FontSize="Large"
-                   TextColor="White"
-                   VerticalTextAlignment="Center"
-                   BackgroundColor="{StaticResource Primary}"
-                   HorizontalOptions="Center"
-                   HeightRequest="100"/>
-            
-            <Label Text="idk what im gonna do with this one"
-                   FontSize="Large"
-                   TextColor="White"
-                   VerticalTextAlignment="Center"
-                   BackgroundColor="{StaticResource Primary}"
-                   HorizontalOptions="Center"
-                   HeightRequest="100"/>
-        </VerticalStackLayout>
+    <Grid ColumnDefinitions="*,*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,*,*,auto"
+          RowSpacing="10">
+        <Label Text="{Binding Projectm}"
+           BackgroundColor="{StaticResource Primary}"/>
+        <Label Text="{Binding Ticketm}"
+               Grid.Row="1"
+               BackgroundColor="{StaticResource Primary}"/>
+        <Label Text="{Binding Employeem}"
+               Grid.Row="2"
+               BackgroundColor="{StaticResource Primary}"/>
+        <Button Text="Projects" 
+                Grid.Row="3"
+                Command="{Binding GoToProjectsCommand}"/>
+        <Button Text="Tickets" 
+                Grid.Row="3"
+                Grid.Column="1"
+                Command="{Binding GoToTicketsCommand}"/>
+        <Button Text="Employees"
+                Grid.Row="3"
+                Grid.Column="2"
+                Command="{Binding GoToEmployeesCommand}"/>
     </Grid>
+
+
 
 
 
