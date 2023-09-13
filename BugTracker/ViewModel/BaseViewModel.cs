@@ -15,6 +15,15 @@ namespace BugTracker.ViewModel
         [ObservableProperty]
         string title;
 
+        [ObservableProperty]
+        string projectm;
+
+        [ObservableProperty]
+        string ticketm;
+
+        [ObservableProperty]
+        string employeem;
+
         public bool IsNotBusy => !IsBusy;
     }
 }

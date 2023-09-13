@@ -1,13 +1,14 @@
-﻿namespace BugTracker
-{
-    public partial class MainPage : ContentPage
-    {
-       
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+﻿namespace BugTracker.View;
 
+public partial class MainPage : ContentPage
+{
+   
+    public MainPage(MainViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
         
     }
+
+    
 }

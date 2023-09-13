@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BugTracker.Services;
+using BugTracker.View;
+using Microsoft.Extensions.Logging;
 
 namespace BugTracker
 {
@@ -18,6 +20,15 @@ namespace BugTracker
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddScoped<IBugService, BugService>();
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<ProjectViewModel>();
+            builder.Services.AddSingleton<ProjectPage>();
+            builder.Services.AddSingleton<TicketViewModel>();
+            builder.Services.AddSingleton<TicketPage>();
+            builder.Services.AddSingleton<EmployeeViewModel>();
+            builder.Services.AddSingleton<EmployeePage>();
 
             return builder.Build();
         }
