@@ -13,7 +13,7 @@ namespace BugTracker.Model
         //TODO: add validation
 
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int Id { get;}
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Role { get; set; }
