@@ -16,6 +16,7 @@ namespace BugTracker.ViewModel
         public SettingsViewModel(IBugService bugService)
         {
             Title = "Settings";
+            this.bugService = bugService;
 
         }
     }

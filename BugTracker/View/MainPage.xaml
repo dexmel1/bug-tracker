@@ -30,6 +30,13 @@
                 Grid.Row="3"
                 Grid.Column="2"
                 Command="{Binding GoToEmployeesCommand}"/>
+        <Button ImageSource="settings.png"
+                Grid.Row="0"
+                Grid.Column="2"
+                HeightRequest="15"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Command="{Binding GoToSettingsCommand}"/>
     </Grid>
 
 

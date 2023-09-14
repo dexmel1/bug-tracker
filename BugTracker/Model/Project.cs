@@ -10,12 +10,12 @@ namespace BugTracker.Model
     public class Project
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int Id { get;}
         public string Name { get; set; }
         public string Description { get; set; }
         public string Lead { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
-        public DateTime Updated { get; set; }
+        public DateTime Created { get;} = DateTime.Now;
+        public DateTime Updated { get;}
         public DateTime EstCompletion { get; set; }
 
     }

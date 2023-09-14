@@ -70,6 +70,11 @@ namespace BugTracker.ViewModel
             await Shell.Current.GoToAsync(nameof(EmployeePage));
         }
 
+        [RelayCommand]
+        async Task GoToSettings()
+        {
+            await Shell.Current.GoToAsync(nameof(SettingsPage));
+        }
 
     }
 }

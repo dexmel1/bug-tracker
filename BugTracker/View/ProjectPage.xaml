@@ -6,10 +6,79 @@
              xmlns:viewmodel="clr-namespace:BugTracker.ViewModel"
              Title="{Binding Title}"
              x:DataType="viewmodel:ProjectViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid
+    ColumnDefinitions="*,*"
+    ColumnSpacing="5"
+    RowDefinitions="*,Auto"
+    RowSpacing="0">
+        <RefreshView
+        Grid.ColumnSpan="2"
+        Command="{Binding GetProjectCommand}"
+        IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView
+                ItemsSource="{Binding Projects}"
+                SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <Grid ColumnDefinitions="*, *">
+                            <VerticalStackLayout>
+                                <Label Text="ID"/>
+                                <Editor Placeholder="ID"/>
+                                <Label Text="Name"/>
+                                <Editor Placeholder="Name of Project"/>
+                                <Label Text="Description"/>
+                                <Editor Placeholder="Description of Project"
+                                       HeightRequest="100"
+                                       AutoSize="TextChanges"/>
+                                <Label Text="Project Lead"/>
+                                <Picker ItemsSource="{Binding Employees}"/>
+                                <Label Text="Estimated Completion Date"/>
+                                <DatePicker />
+                            </VerticalStackLayout>
+                            <StackLayout Padding="100" Grid.Column="1">
+                                <Image
+                            HorizontalOptions="Center"
+                            Source="dotnet_bot.png"
+                            HeightRequest="160"
+                            WidthRequest="160"
+                            VerticalOptions="Center" />
+                                <Label Text="No Projects currently on record"
+                                   HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                    </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout  Orientation="Horizontal" Span="3"/>
+                </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Project">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                    <!--<Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProjectViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>-->
+                                    <Grid Padding="0" ColumnDefinitions="125,*">
+                                        <!--<Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="125"
+                                        Source="{Binding Image}"
+                                        WidthRequest="125" />-->
+                                        <VerticalStackLayout
+                                        Grid.Column="1"
+                                        VerticalOptions="Center"
+                                        Padding="10">
+                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Id}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+    </Grid>  
 </ContentPage>
