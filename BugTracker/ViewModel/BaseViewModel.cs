@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BugTracker.Services;
+using BugTracker.View;
+using BugTracker.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,16 +17,6 @@ namespace BugTracker.ViewModel
 
         [ObservableProperty]
         string title;
-
-        [ObservableProperty]
-        string projectm;
-
-        [ObservableProperty]
-        string ticketm;
-
-        [ObservableProperty]
-        string employeem;
-
         public bool IsNotBusy => !IsBusy;
     }
 }

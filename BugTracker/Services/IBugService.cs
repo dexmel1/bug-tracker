@@ -2,9 +2,9 @@
 {
     public interface IBugService
     {
-        Task AddEmployee(Employee emp);
-        Task AddProject(Project proj);
-        Task AddTicket(Ticket ticket);
+        Task<int> AddEmployee(Employee emp);
+        Task<int> AddProject(Project proj);
+        Task<int> AddTicket(Ticket ticket);
         Task<IEnumerable<Employee>> GetEmployee();
         Task<Employee> GetEmployee(int id);
         Task<IEnumerable<Project>> GetProject();

@@ -20,7 +20,7 @@ namespace BugTracker.Model
         public string Status { get; set; }
         public bool IsClosed { get; set; } = false;
         public string AssignedTo { get; set; }
-        public string Project { get; set; }
+        public Project Project { get; set; }
 
     }
 }

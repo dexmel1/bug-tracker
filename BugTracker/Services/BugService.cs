@@ -25,7 +25,7 @@ namespace BugTracker.Services
             var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Tracker.db");
             db = new SQLiteAsyncConnection(databasePath);
 
-            //Created both tables here
+            //Created all tables here
             await db.CreateTableAsync<Employee>();
             await db.CreateTableAsync<Ticket>();
             await db.CreateTableAsync<Project>();
@@ -34,11 +34,13 @@ namespace BugTracker.Services
 
 
         //Tasks for employee table
-        public async Task AddEmployee(Employee emp)
+        public async Task<int> AddEmployee(Employee employee)
         {
             await Init();
-
-            var id = await db.InsertAsync(emp);
+            if (employee.Id != 0)
+                return await db.UpdateAsync(employee);
+            else
+                return await db.InsertAsync(employee);
         }
 
         public async Task RemoveEmployee(int id)
@@ -64,13 +66,14 @@ namespace BugTracker.Services
             return employee;
         }
 
-
         //Tasks for ticket Table
-        public async Task AddTicket(Ticket ticket)
+        public async Task<int> AddTicket(Ticket ticket)
         {
             await Init();
-
-            var id = await db.InsertAsync(ticket);
+            if (ticket.Id != 0)
+                return await db.UpdateAsync(ticket);
+            else
+                return await db.InsertAsync(ticket);
         }
 
         public async Task RemoveTicekt(int id)
@@ -97,11 +100,13 @@ namespace BugTracker.Services
         }
 
         //Task for Project Table
-        public async Task AddProject(Project proj)
+        public async Task<int> AddProject(Project project)
         {
             await Init();
-
-            var id = await db.InsertAsync(proj);
+            if (project.Id != 0)
+                return await db.UpdateAsync(project);
+            else
+                return await db.InsertAsync(project);
         }
 
         public async Task RemoveProject(int id)

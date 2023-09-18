@@ -6,17 +6,25 @@
              xmlns:viewmodel="clr-namespace:BugTracker.ViewModel"
              Title="{Binding Title}"
              x:DataType="viewmodel:MainViewModel">
-
+    
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh"
+                     Command="{Binding GetProjectStatusCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    
     <Grid ColumnDefinitions="*,*,*"
           ColumnSpacing="5"
           RowDefinitions="*,*,*,auto"
-          RowSpacing="10">
-        <Label Text="{Binding Projectm}"
-           BackgroundColor="{StaticResource Primary}"/>
-        <Label Text="{Binding Ticketm}"
+          RowSpacing="10"
+          >
+        <Label Text="{Binding Projects.Count, StringFormat='There are currently {0} projects on record' }"
+               BackgroundColor="{StaticResource Primary}"/>
+        <Label Text="{Binding Tickets.Count, StringFormat='There are currently {0} tickets on record' }"
                Grid.Row="1"
                BackgroundColor="{StaticResource Primary}"/>
-        <Label Text="{Binding Employeem}"
+        <Label Text="{Binding Employees.Count, StringFormat='There are currently {0} employees on record' }"
                Grid.Row="2"
                BackgroundColor="{StaticResource Primary}"/>
         <Button Text="Projects" 

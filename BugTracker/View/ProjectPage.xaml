@@ -6,59 +6,75 @@
              xmlns:viewmodel="clr-namespace:BugTracker.ViewModel"
              Title="{Binding Title}"
              x:DataType="viewmodel:ProjectViewModel">
-    <Grid
-    ColumnDefinitions="*,*"
-    ColumnSpacing="5"
-    RowDefinitions="*,Auto"
-    RowSpacing="0">
-        <RefreshView
-        Grid.ColumnSpan="2"
-        Command="{Binding GetProjectCommand}"
-        IsRefreshing="{Binding IsRefreshing}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh"
+                     Command="{Binding GetStatusCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="10"
+          RowDefinitions="*,*">    
+        <VerticalStackLayout x:Name="projectInput" Spacing="10">
+            <Label Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
+            <Label Text="Name"/>
+            <Editor Placeholder="Name of Project"
+                    Text="{Binding Name}"/>
+            <Label Text="Description"/>
+            <Editor Placeholder="Description of Project"
+            Text="{Binding Description}"
+            HeightRequest="100"
+            AutoSize="TextChanges"/>
+            <Label Text="Project Lead"/>
+            <Picker ItemsSource="{Binding Employees}"
+            ItemDisplayBinding="{Binding FullName}"/>
+            <Label Text="Estimated Completion Date"/>
+            <DatePicker />
+            <Grid ColumnDefinitions="*,*,*"
+                  ColumnSpacing="5">
+                <Button Text="Add Project"
+                        Grid.Column="0"
+                        Command="{Binding AddProjectCommand}"/>
+                <Button Text="Update Project"
+                        Grid.Column="1"
+                        Command="{Binding AddProjectCommand}"/>
+                <Button Text="Delete Project"
+                        Grid.Column="2"
+                        Command="{Binding DeleteProjectCommand}"/>
+            </Grid>
+        </VerticalStackLayout>
+        <RefreshView Grid.Column="1"
+                     Grid.RowSpan="2"
+                     Command="{Binding GetStatusCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
                 <CollectionView
-                ItemsSource="{Binding Projects}"
-                SelectionMode="None">
+                    ItemsSource="{Binding Projects}"
+                    SelectionMode="Single">
                     <CollectionView.EmptyView>
-                        <Grid ColumnDefinitions="*, *">
-                            <VerticalStackLayout>
-                                <Label Text="ID"/>
-                                <Editor Placeholder="ID"/>
-                                <Label Text="Name"/>
-                                <Editor Placeholder="Name of Project"/>
-                                <Label Text="Description"/>
-                                <Editor Placeholder="Description of Project"
-                                       HeightRequest="100"
-                                       AutoSize="TextChanges"/>
-                                <Label Text="Project Lead"/>
-                                <Picker ItemsSource="{Binding Employees}"/>
-                                <Label Text="Estimated Completion Date"/>
-                                <DatePicker />
-                            </VerticalStackLayout>
-                            <StackLayout Padding="100" Grid.Column="1">
-                                <Image
-                            HorizontalOptions="Center"
-                            Source="dotnet_bot.png"
-                            HeightRequest="160"
-                            WidthRequest="160"
-                            VerticalOptions="Center" />
+                        <StackLayout Padding="100" Grid.Column="1">
+                                <Image HorizontalOptions="Center"
+                                       Source="dotnet_bot.png"
+                                       HeightRequest="160"
+                                       WidthRequest="160"
+                                       VerticalOptions="Center" />
                                 <Label Text="No Projects currently on record"
-                                   HorizontalOptions="Center"/>
+                                   HorizontalOptions="Center"
+                                       FontSize="Medium"/>
                             </StackLayout>
-                        </Grid>
                     </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout  Orientation="Horizontal" Span="3"/>
+                    <GridItemsLayout  Orientation="Vertical" Span="1"/>
                 </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Project">
                             <Grid Padding="10">
                                 <Frame HeightRequest="125" Style="{StaticResource CardView}">
-                                    <!--<Frame.GestureRecognizers>
+                                    <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProjectViewModel}}, Path=GoToDetailsCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProjectViewModel}}, Path=GetSingleProjectCommand}"
                                         CommandParameter="{Binding .}"/>
-                                    </Frame.GestureRecognizers>-->
+                                    </Frame.GestureRecognizers>
                                     <Grid Padding="0" ColumnDefinitions="125,*">
                                         <!--<Image
                                         Aspect="AspectFill"
@@ -68,9 +84,13 @@
                                         <VerticalStackLayout
                                         Grid.Column="1"
                                         VerticalOptions="Center"
-                                        Padding="10">
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Name}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Id}" />
+                                        >
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
+                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding Name, StringFormat='Project Name: {0}'}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Lead.FullName, StringFormat='Lead: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Updated, StringFormat='Last Updated: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding EstCompletion, StringFormat='Estimated Completion: {0}'}"/>
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
@@ -80,5 +100,14 @@
                 </CollectionView>
             </ContentView>
         </RefreshView>
+
+        <ActivityIndicator
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="Fill"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            Color="{StaticResource Primary}"
+            VerticalOptions="Center" />
     </Grid>  
 </ContentPage>

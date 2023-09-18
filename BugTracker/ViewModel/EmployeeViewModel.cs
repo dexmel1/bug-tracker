@@ -10,27 +10,27 @@ namespace BugTracker.ViewModel
 {
     public partial class EmployeeViewModel : BaseViewModel
     {
-
-        string fName, lName, role;
-
-        public string FName { get => fName; set => SetProperty(ref fName, value); }
-        public string LName { get => lName; set => SetProperty(ref lName, value); }
-        public string Role { get => role; set => SetProperty(ref role, value); }
-        
         public ObservableCollection<Project> Projects { get; } = new();
         public ObservableCollection<Employee> Employees { get; } = new();
         public ObservableCollection<Ticket> Tickets { get; } = new();
         IBugService bugService;
+
         public EmployeeViewModel(IBugService bugService)
         {
             Title = "Employees";
             this.bugService = bugService;
-            
-    
         }
 
         [ObservableProperty]
         bool isRefreshing;
+        [ObservableProperty]
+        int id;
+        [ObservableProperty]
+        string fName;
+        [ObservableProperty]
+        string lName;
+        [ObservableProperty]
+        string role;
 
         [RelayCommand]
         async Task GetEmployeeAsync()
@@ -69,6 +69,7 @@ namespace BugTracker.ViewModel
             try
             {
                 Employee emp = new Employee();
+                emp.Id = Id;
                 emp.FirstName = FName;
                 emp.LastName = LName;
                 emp.Role = Role;
@@ -86,6 +87,50 @@ namespace BugTracker.ViewModel
             {
                 IsBusy = false;
                 IsRefreshing = false;
+                Id = 0;
+                FName = string.Empty;
+                LName = string.Empty;
+                Role = string.Empty;
+                await GetEmployeeAsync();
+            }
+        }
+
+        [RelayCommand]
+        void GetSingleEmployee(Employee employee)
+        {
+            Id = employee.Id;
+            FName = employee.FirstName;
+            LName = employee.LastName;
+            Role = employee.Role;
+        }
+
+        [RelayCommand]
+        async Task DeleteEmployeeAsync()
+        {
+            if(IsBusy) return;
+
+            try
+            {
+                if (Id == 0)
+                    return;
+
+                IsBusy = true;
+                await bugService.RemoveEmployee(Id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to add Employee!: {ex.Message}");
+                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                IsRefreshing = false;
+                Id = 0;
+                FName = string.Empty;
+                LName = string.Empty;
+                Role = string.Empty;
+                await GetEmployeeAsync();
             }
         }
 

@@ -6,33 +6,38 @@
              xmlns:viewmodel="clr-namespace:BugTracker.ViewModel"
              Title="{Binding Title}"
              x:DataType="viewmodel:EmployeeViewModel">
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"
                      Command="{Binding GetEmployeeCommand}"/>
     </ContentPage.ToolbarItems>
-    
-    
+
     <Grid ColumnDefinitions="*,*"
           ColumnSpacing="10"
           RowDefinitions="*,*"
           RowSpacing="10">
-        <VerticalStackLayout Spacing="10">
+        <VerticalStackLayout x:Name="employeeInput" Spacing="10">
+            <Label Text="{Binding Id, StringFormat='Employee ID: {0}' }"/>
             <Label Text="First Name"/>
             <Editor Placeholder="Enter First Name"
                     Text="{Binding FName}"/>
             <Label Text="Last Name"/>
-            <Editor Placeholder="Enter Last Name" Text="{Binding LName}"/>
+            <Editor Placeholder="Enter Last Name" 
+                    Text="{Binding LName}"/>
             <Label Text="Role"/>
-            <Editor Placeholder="Enter Employee Role" Text="{Binding Role}"/>
+            <Editor Placeholder="Enter Employee Role" 
+                    Text="{Binding Role}"/>
             <Grid ColumnDefinitions="*,*,*"
                   ColumnSpacing="5">
                 <Button Text="Add Employee"
                         Grid.Column="0"
                         Command="{Binding AddEmployeeCommand}"/>
                 <Button Text="Update Employee"
-                        Grid.Column="1"/>
+                        Grid.Column="1"
+                        Command="{Binding AddEmployeeCommand}"/>
                 <Button Text="Delete Employee"
-                        Grid.Column="2"/>
+                        Grid.Column="2"
+                        Command="{Binding DeleteEmployeeCommand}"/>
             </Grid>
         </VerticalStackLayout>
         <RefreshView Grid.Column="1"
@@ -42,7 +47,7 @@
             <ContentView>
                 <CollectionView
                     ItemsSource="{Binding Employees}"
-                    SelectionMode="None">
+                    SelectionMode="Single">
                     <CollectionView.EmptyView>
                         <StackLayout Padding="100">
                             <Image Source="dotnet_bot.png"
@@ -62,11 +67,11 @@
                         <DataTemplate x:DataType="model:Employee">
                             <Grid Padding="10">
                                 <Frame HeightRequest="125" Style="{StaticResource CardView}">
-                                    <!--<Frame.GestureRecognizers>
+                                    <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EmployeeViewModel}}, Path=GoToDetailsCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EmployeeViewModel}}, Path=GetSingleEmployeeCommand}"
                                             CommandParameter="{Binding .}"/>
-                                    </Frame.GestureRecognizers>-->
+                                    </Frame.GestureRecognizers>
                                     <Grid Padding="0" ColumnDefinitions="125,*">
                                         <!--<Image
                                             Aspect="AspectFill"
@@ -77,8 +82,8 @@
                                             Grid.Column="1"
                                             VerticalOptions="Center"
                                             Padding="10">
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding FirstName}"/>
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding LastName}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Employee ID: {0}' }"/>
+                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding FullName}"/>
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Role}" />
                                         </VerticalStackLayout>
                                     </Grid>
