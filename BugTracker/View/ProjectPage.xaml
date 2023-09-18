@@ -81,17 +81,15 @@
                                         HeightRequest="125"
                                         Source="{Binding Image}"
                                         WidthRequest="125" />-->
-                                        <VerticalStackLayout
-                                        Grid.Column="1"
-            VerticalOptions="Center" 
-                                        >
+                                        <VerticalStackLayout Grid.Column="1"
+                                                             VerticalOptions="Center">
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Name, StringFormat='Project Name: {0}'}" />
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}" />
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Lead.FullName, StringFormat='Lead: {0}'}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Updated, StringFormat='Last Updated: {0}'}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding EstCompletion, StringFormat='Estimated Completion: {0}'}"/>
-    </VerticalStackLayout>
+                                        </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
                             </Grid>
