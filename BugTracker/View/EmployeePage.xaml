@@ -80,12 +80,8 @@
                                             WidthRequest="125" />-->
                                         <VerticalStackLayout
                                             Grid.Column="1"
-                                            VerticalOptions="Center"
-                                            Padding="10">
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Employee ID: {0}' }"/>
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding FullName}"/>
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Role}" />
-                                        </VerticalStackLayout>
+            VerticalOptions="Center" 
+    </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
                             </Grid>

@@ -58,7 +58,7 @@ namespace BugTracker.ViewModel
                 IsBusy = false;
                 IsRefreshing = false;
             }
-        }
+    }
 
         [RelayCommand]
         async Task AddEmployeeAsync()
