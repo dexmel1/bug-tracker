@@ -6,10 +6,111 @@
              xmlns:viewmodel="clr-namespace:BugTracker.ViewModel"
              Title="{Binding Title}"
              x:DataType="viewmodel:TicketViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh"
+                 Command="{Binding GetStatusCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="10"
+          RowDefinitions="*,*">
+        <VerticalStackLayout x:Name="ticketInput" Spacing="10">
+            <Label Text="{Binding Id, StringFormat='Ticket ID: {0}'}"/>
+            <Label Text="Description"/>
+            <Editor Placeholder="Description of Ticket"
+                    Text="{Binding Description}"
+                    HeightRequest="100"
+                    AutoSize="TextChanges"/>
+            <Label Text="Ticket Priority"/>
+            <Picker ItemsSource="{Binding PriorityCode}"
+                    SelectedItem="{Binding Priority}"/>
+            <Label Text="Select Ticket Status"/>
+            <Picker ItemsSource="{Binding StatusCode}"
+                    SelectedItem="{Binding Status}"/>
+            <Label Text="Assigned to Employee:"/>
+            <Picker ItemsSource="{Binding Employees}"
+                    ItemDisplayBinding="{Binding FullName}"
+                    SelectedItem="{Binding EmpAssign}"/>
+            <Label Text="Assign to Project:"/>
+            <Picker ItemsSource="{Binding Projects}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding ProjAssign}"/>
+            <Grid ColumnDefinitions="*,*,*"
+                  ColumnSpacing="5">
+                <Button Text="Add Ticket"
+                        Grid.Column="0"
+                        Command="{Binding AddTicketCommand}"/>
+                <Button Text="Update Ticket"
+                        Grid.Column="1"
+                        Command="{Binding AddTicketCommand}"/>
+                <Button Text="Delete Ticket"
+                        Grid.Column="2"
+                        Command="{Binding DeleteTicketCommand}"/>
+            </Grid>
+        </VerticalStackLayout>
+        <RefreshView Grid.Column="1"
+                     Grid.RowSpan="2"
+                     Command="{Binding GetStatusCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <ContentView>
+                <CollectionView ItemsSource="{Binding Tickets}"
+                                SelectionMode="Single">
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="100" Grid.Column="1">
+                            <Image HorizontalOptions="Center"
+                                   Source="dotnet_bot.png"
+                                   HeightRequest="160"
+                                   WidthRequest="160"
+                                   VerticalOptions="Center" />
+                            <Label Text="No Ticekts currently on record"
+                                   HorizontalOptions="Center"
+                                   FontSize="Medium"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout  Orientation="Vertical" Span="1"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Ticket">
+                            <Grid Padding="10">
+                                <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TicketViewModel}}, Path=GetSingleTicketCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    <Grid Padding="0" ColumnDefinitions="125,*">
+                                        <!--<Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="125"
+                                    Source="{Binding Image}"
+                                    WidthRequest="125" />-->
+                                        <VerticalStackLayout Grid.Column="1"
+                                                             VerticalOptions="Center">
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Ticket ID: {0}'}"/>
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}" />
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Priority}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Status}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding AssignedTo.FullName}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Project.Name}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Updated, StringFormat='Last Updated: {0}'}"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ContentView>
+        </RefreshView>
+
+        <ActivityIndicator
+        Grid.RowSpan="2"
+        Grid.ColumnSpan="2"
+        HorizontalOptions="Fill"
+        IsRunning="{Binding IsBusy}"
+        IsVisible="{Binding IsBusy}"
+        Color="{StaticResource Primary}"
+        VerticalOptions="Center" />
+    </Grid>
 </ContentPage>

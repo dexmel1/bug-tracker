@@ -27,7 +27,8 @@
             AutoSize="TextChanges"/>
             <Label Text="Project Lead"/>
             <Picker ItemsSource="{Binding Employees}"
-            ItemDisplayBinding="{Binding FullName}"/>
+            ItemDisplayBinding="{Binding FullName}"
+                    SelectedItem="{Binding LeadEmp}"/>
             <Label Text="Estimated Completion Date"/>
             <DatePicker />
             <Grid ColumnDefinitions="*,*,*"
@@ -86,7 +87,7 @@
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Name, StringFormat='Project Name: {0}'}" />
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Lead.FullName, StringFormat='Lead: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Lead}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Updated, StringFormat='Last Updated: {0}'}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding EstCompletion, StringFormat='Estimated Completion: {0}'}"/>
                                         </VerticalStackLayout>

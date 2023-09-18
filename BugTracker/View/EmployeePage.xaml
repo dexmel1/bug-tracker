@@ -78,9 +78,11 @@
                                             HeightRequest="125"
                                             Source="{Binding Image}"
                                             WidthRequest="125" />-->
-                                        <VerticalStackLayout
-                                            Grid.Column="1"
-            VerticalOptions="Center">
+                                        <VerticalStackLayout Grid.Column="1"
+                                                             VerticalOptions="Center">
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Employee ID: {0}'}"/>
+                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding FullName}" />
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Role, StringFormat='Role: {0}'}" />
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Frame>

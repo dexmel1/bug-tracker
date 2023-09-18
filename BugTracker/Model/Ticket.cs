@@ -16,10 +16,11 @@ namespace BugTracker.Model
         public int Id { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime? Updated { get; set; } = null;
         public int Priority { get; set; }
         public string Status { get; set; }
         public bool IsClosed { get; set; } = false;
-        public string AssignedTo { get; set; }
+        public Employee AssignedTo { get; set; }
         public Project Project { get; set; }
 
     }

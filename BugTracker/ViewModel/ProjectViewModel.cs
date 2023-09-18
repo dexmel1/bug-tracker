@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,6 @@ namespace BugTracker.ViewModel
         {
             Title = "Projects";
             this.bugService = bugService;
-
         }
 
         [ObservableProperty]
@@ -35,6 +35,8 @@ namespace BugTracker.ViewModel
         Employee leadEmp;
         [ObservableProperty]
         DateTime completionDate;
+
+        
 
         [RelayCommand]
         async Task GetStatus()
