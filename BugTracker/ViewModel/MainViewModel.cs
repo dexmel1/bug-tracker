@@ -21,6 +21,7 @@ namespace BugTracker.ViewModel
             IEnumerable<Ticket> closedTickets = from t in Tickets where t.IsClosed = true select t;
             Title = "Bug Tracker";
             this.bugService = bugService;
+            GetStatus();
 
         }
 
@@ -28,7 +29,7 @@ namespace BugTracker.ViewModel
         bool isRefreshing;
 
         [RelayCommand]
-        async  Task GetProjectStatus()
+        async  Task GetStatus()
         {
             var projects = await bugService.GetProject();
             if (Projects.Count() != 0)

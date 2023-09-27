@@ -17,31 +17,40 @@
           RowDefinitions="*,*">    
         <VerticalStackLayout x:Name="projectInput" Spacing="10">
             <Label Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
-            <Label Text="Name"/>
+            <Label Text="Name"
+                   Style="{StaticResource MediumLabel}"/>
             <Editor Placeholder="Name of Project"
-                    Text="{Binding Name}"/>
-            <Label Text="Description"/>
+                    Text="{Binding Name}"
+                    Style="{StaticResource Placeholder}"/>
+            <Label Text="Description"
+                   Style="{StaticResource MediumLabel}"/>
             <Editor Placeholder="Description of Project"
-            Text="{Binding Description}"
-            HeightRequest="100"
-            AutoSize="TextChanges"/>
-            <Label Text="Project Lead"/>
+                    Text="{Binding Description}"
+                    HeightRequest="100"
+                    AutoSize="TextChanges"
+                    Style="{StaticResource Placeholder}"/>
+            <Label Text="Project Lead"
+                   Style="{StaticResource MediumLabel}"/>
             <Picker ItemsSource="{Binding Employees}"
-            ItemDisplayBinding="{Binding FullName}"
+                    ItemDisplayBinding="{Binding FullName}"
                     SelectedItem="{Binding LeadEmp}"/>
-            <Label Text="Estimated Completion Date"/>
+            <Label Text="Estimated Completion Date"
+                   Style="{StaticResource MediumLabel}"/>
             <DatePicker />
             <Grid ColumnDefinitions="*,*,*"
                   ColumnSpacing="5">
                 <Button Text="Add Project"
                         Grid.Column="0"
-                        Command="{Binding AddProjectCommand}"/>
+                        Command="{Binding AddProjectCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
                 <Button Text="Update Project"
                         Grid.Column="1"
-                        Command="{Binding AddProjectCommand}"/>
+                        Command="{Binding AddProjectCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
                 <Button Text="Delete Project"
                         Grid.Column="2"
-                        Command="{Binding DeleteProjectCommand}"/>
+                        Command="{Binding DeleteProjectCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
             </Grid>
         </VerticalStackLayout>
         <RefreshView Grid.Column="1"
@@ -70,7 +79,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Project">
                             <Grid Padding="10">
-                                <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame HeightRequest="140" Style="{StaticResource CardView}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProjectViewModel}}, Path=GetSingleProjectCommand}"
@@ -86,8 +95,9 @@
                                                              VerticalOptions="Center">
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
                                             <Label Style="{StaticResource LargeLabel}" Text="{Binding Name, StringFormat='Project Name: {0}'}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Lead}"/>
+                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Lead, StringFormat='Employee Lead: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Created, StringFormat='Created: {0}'}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Updated, StringFormat='Last Updated: {0}'}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding EstCompletion, StringFormat='Estimated Completion: {0}'}"/>
                                         </VerticalStackLayout>

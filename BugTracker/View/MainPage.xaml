@@ -10,7 +10,7 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"
-                     Command="{Binding GetProjectStatusCommand}"/>
+                     Command="{Binding GetStatusCommand}"/>
     </ContentPage.ToolbarItems>
     
     
@@ -20,31 +20,36 @@
           RowSpacing="10"
           >
         <Label Text="{Binding Projects.Count, StringFormat='There are currently {0} projects on record' }"
-               BackgroundColor="{StaticResource Primary}"/>
+               Style="{StaticResource LargeLabel}"
+               Margin="0,10,0,0"/>
         <Label Text="{Binding Tickets.Count, StringFormat='There are currently {0} tickets on record' }"
                Grid.Row="1"
-               BackgroundColor="{StaticResource Primary}"/>
+               Style="{StaticResource LargeLabel}"/>
         <Label Text="{Binding Employees.Count, StringFormat='There are currently {0} employees on record' }"
                Grid.Row="2"
-               BackgroundColor="{StaticResource Primary}"/>
+               Style="{StaticResource LargeLabel}"/>
         <Button Text="Projects" 
                 Grid.Row="3"
-                Command="{Binding GoToProjectsCommand}"/>
+                Command="{Binding GoToProjectsCommand}"
+                Style="{StaticResource ButtonOutline}"/>
         <Button Text="Tickets" 
                 Grid.Row="3"
                 Grid.Column="1"
-                Command="{Binding GoToTicketsCommand}"/>
+                Command="{Binding GoToTicketsCommand}"
+                Style="{StaticResource ButtonOutline}"/>
         <Button Text="Employees"
                 Grid.Row="3"
                 Grid.Column="2"
-                Command="{Binding GoToEmployeesCommand}"/>
+                Command="{Binding GoToEmployeesCommand}"
+                Style="{StaticResource ButtonOutline}"/>
         <Button ImageSource="settings.png"
                 Grid.Row="0"
                 Grid.Column="2"
                 HeightRequest="15"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
-                Command="{Binding GoToSettingsCommand}"/>
+                Command="{Binding GoToSettingsCommand}"
+                Style="{StaticResource ButtonOutline}"/>
     </Grid>
 
 

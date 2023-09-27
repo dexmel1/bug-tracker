@@ -21,6 +21,7 @@ namespace BugTracker.ViewModel
         {
             Title = "Projects";
             this.bugService = bugService;
+            GetStatus();
         }
 
         [ObservableProperty]
@@ -105,11 +106,15 @@ namespace BugTracker.ViewModel
                 proj.Id = Id;
                 proj.Name = Name;
                 proj.Description = Description;
-                proj.Lead = LeadEmp;
+                proj.Lead = LeadEmp.Id;
                 proj.EstCompletion = CompletionDate;
                 if(Id != 0)
                 {
                     proj.Updated = DateTime.Now;
+                }
+                else
+                {
+                    proj.Created = DateTime.Now;
                 }
 
                 IsBusy = true;
@@ -139,12 +144,12 @@ namespace BugTracker.ViewModel
             Id = project.Id;
             Name = project.Name;
             Description = project.Description;
-            LeadEmp = project.Lead;
+            LeadEmp = Employees.FirstOrDefault(e => e.Id == project.Id); 
             CompletionDate = project.EstCompletion;
         }
 
         [RelayCommand]
-        async Task DeleteProject(Project project)
+        async Task DeleteProject()
         {
             if (IsBusy) return;
 

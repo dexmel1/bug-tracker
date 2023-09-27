@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -15,13 +16,17 @@ namespace BugTracker.Model
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Description { get; set; }
-        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime? Created { get; set; } = null;
         public DateTime? Updated { get; set; } = null;
         public int Priority { get; set; }
         public string Status { get; set; }
         public bool IsClosed { get; set; } = false;
-        public Employee AssignedTo { get; set; }
-        public Project Project { get; set; }
+
+        [ForeignKey(nameof(Employee.Id))]
+        public int AssignedTo { get; set; }
+
+        [ForeignKey(nameof(Project.Id))]
+        public int ProjectAssign { get; set; }
 
     }
 }

@@ -16,23 +16,30 @@
           ColumnSpacing="10"
           RowDefinitions="*,*">
         <VerticalStackLayout x:Name="ticketInput" Spacing="10">
-            <Label Text="{Binding Id, StringFormat='Ticket ID: {0}'}"/>
+            <Label Text="{Binding Id, StringFormat='Ticket ID: {0}'}"
+                   Style="{StaticResource MediumLabel}"
+                   Margin="0,10"/>
             <Label Text="Description"/>
             <Editor Placeholder="Description of Ticket"
                     Text="{Binding Description}"
                     HeightRequest="100"
-                    AutoSize="TextChanges"/>
-            <Label Text="Ticket Priority"/>
+                    AutoSize="TextChanges"
+                    Style="{StaticResource Placeholder}"/>
+            <Label Text="Ticket Priority"
+                   Style="{StaticResource MediumLabel}"/>
             <Picker ItemsSource="{Binding PriorityCode}"
                     SelectedItem="{Binding Priority}"/>
-            <Label Text="Select Ticket Status"/>
+            <Label Text="Select Ticket Status"
+                   Style="{StaticResource MediumLabel}"/>
             <Picker ItemsSource="{Binding StatusCode}"
                     SelectedItem="{Binding Status}"/>
-            <Label Text="Assigned to Employee:"/>
+            <Label Text="Assigned to Employee:"
+                   Style="{StaticResource MediumLabel}"/>
             <Picker ItemsSource="{Binding Employees}"
                     ItemDisplayBinding="{Binding FullName}"
                     SelectedItem="{Binding EmpAssign}"/>
-            <Label Text="Assign to Project:"/>
+            <Label Text="Assign to Project:"
+                   Style="{StaticResource MediumLabel}"/>
             <Picker ItemsSource="{Binding Projects}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding ProjAssign}"/>
@@ -40,13 +47,16 @@
                   ColumnSpacing="5">
                 <Button Text="Add Ticket"
                         Grid.Column="0"
-                        Command="{Binding AddTicketCommand}"/>
+                        Command="{Binding AddTicketCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
                 <Button Text="Update Ticket"
                         Grid.Column="1"
-                        Command="{Binding AddTicketCommand}"/>
+                        Command="{Binding AddTicketCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
                 <Button Text="Delete Ticket"
                         Grid.Column="2"
-                        Command="{Binding DeleteTicketCommand}"/>
+                        Command="{Binding DeleteTicketCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
             </Grid>
         </VerticalStackLayout>
         <RefreshView Grid.Column="1"
@@ -74,7 +84,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Ticket">
                             <Grid Padding="10">
-                                <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                                <Frame HeightRequest="145" Style="{StaticResource CardView}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TicketViewModel}}, Path=GetSingleTicketCommand}"
                                                               CommandParameter="{Binding .}"/>
@@ -89,10 +99,11 @@
                                                              VerticalOptions="Center">
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Id, StringFormat='Ticket ID: {0}'}"/>
                                             <Label Style="{StaticResource MediumLabel}" Text="{Binding Description, StringFormat='Description: {0}'}" />
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Priority}"/>
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Status}"/>
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding AssignedTo.FullName}"/>
-                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Project.Name}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Priority, StringFormat='Priority: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding AssignedTo, StringFormat='Assigned to Employee: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding ProjectAssign, StringFormat='Assigned to Project: {0}'}"/>
+                                            <Label Style="{StaticResource SmallLabel}" Text="{Binding Created, StringFormat='Created: {0}'}"/>
                                             <Label Style="{StaticResource SmallLabel}" Text="{Binding Updated, StringFormat='Last Updated: {0}'}"/>
                                         </VerticalStackLayout>
                                     </Grid>

@@ -1,4 +1,5 @@
 ﻿using BugTracker.Services;
+using Microsoft.Maui.Animations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace BugTracker.ViewModel
             this.bugService = bugService;
             statusCode = new string[] { "Submitted", "In Progress", "In Review", "Closed" };
             priorityCode = new int[] { 1, 2, 3 };
+            GetStatus();
         }
 
         [ObservableProperty]
@@ -41,6 +43,7 @@ namespace BugTracker.ViewModel
         Employee empAssign;
         [ObservableProperty]
         Project projAssign;
+
 
         [RelayCommand]
         async Task GetStatus()
@@ -64,6 +67,7 @@ namespace BugTracker.ViewModel
                 Tickets.Clear();
             foreach (var ticket in tickets)
                 Tickets.Add(ticket);
+            
 
             IsRefreshing = false;
             IsBusy = false;
@@ -109,11 +113,15 @@ namespace BugTracker.ViewModel
                 ticket.Description = Description;
                 ticket.Priority = Priority;
                 ticket.Status = Status;
-                ticket.AssignedTo = EmpAssign;
-                ticket.Project = ProjAssign;
+                ticket.AssignedTo = EmpAssign.Id;
+                ticket.ProjectAssign = ProjAssign.Id;
                 if (Id != 0)
                 {
                     ticket.Updated = DateTime.Now;
+                }
+                else
+                {
+                    ticket.Created = DateTime.Now;
                 }
 
                 IsBusy = true;
@@ -138,7 +146,7 @@ namespace BugTracker.ViewModel
         }
 
         [RelayCommand]
-        async Task DeleteTicketAsync(Ticket ticket)
+        async Task DeleteTicketAsync()
         {
             if (IsBusy) return;
 
@@ -174,8 +182,8 @@ namespace BugTracker.ViewModel
             Description = ticket.Description;
             Priority = ticket.Priority;
             Status = ticket.Status;
-            EmpAssign = ticket.AssignedTo;
-            ProjAssign = ticket.Project;
+            EmpAssign = Employees.FirstOrDefault(e => e.Id == ticket.Id);
+            ProjAssign = Projects.FirstOrDefault(p => p.Id == ticket.Id);
         }
 
     }

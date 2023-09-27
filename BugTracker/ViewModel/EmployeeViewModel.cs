@@ -19,6 +19,7 @@ namespace BugTracker.ViewModel
         {
             Title = "Employees";
             this.bugService = bugService;
+            GetEmployeeAsync();
         }
 
         [ObservableProperty]

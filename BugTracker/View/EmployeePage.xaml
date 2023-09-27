@@ -17,27 +17,37 @@
           RowDefinitions="*,*"
           RowSpacing="10">
         <VerticalStackLayout x:Name="employeeInput" Spacing="10">
-            <Label Text="{Binding Id, StringFormat='Employee ID: {0}' }"/>
+            <Label Text="{Binding Id, StringFormat='Employee ID: {0}' }"
+                   Style="{StaticResource MediumLabel}"
+                   Margin="0,10"/>
             <Label Text="First Name"/>
             <Editor Placeholder="Enter First Name"
-                    Text="{Binding FName}"/>
-            <Label Text="Last Name"/>
+                    Text="{Binding FName}"
+                    Style="{StaticResource Placeholder}"/>
+            <Label Text="Last Name"
+                   Style="{StaticResource MediumLabel}"/>
             <Editor Placeholder="Enter Last Name" 
-                    Text="{Binding LName}"/>
-            <Label Text="Role"/>
+                    Text="{Binding LName}"
+                    Style="{StaticResource Placeholder}"/>
+            <Label Text="Role"
+                   Style="{StaticResource MediumLabel}"/>
             <Editor Placeholder="Enter Employee Role" 
-                    Text="{Binding Role}"/>
+                    Text="{Binding Role}"
+                    Style="{StaticResource Placeholder}"/>
             <Grid ColumnDefinitions="*,*,*"
                   ColumnSpacing="5">
                 <Button Text="Add Employee"
                         Grid.Column="0"
-                        Command="{Binding AddEmployeeCommand}"/>
+                        Command="{Binding AddEmployeeCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
                 <Button Text="Update Employee"
                         Grid.Column="1"
-                        Command="{Binding AddEmployeeCommand}"/>
+                        Command="{Binding AddEmployeeCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
                 <Button Text="Delete Employee"
                         Grid.Column="2"
-                        Command="{Binding DeleteEmployeeCommand}"/>
+                        Command="{Binding DeleteEmployeeCommand}"
+                        Style="{StaticResource ButtonOutline}"/>
             </Grid>
         </VerticalStackLayout>
         <RefreshView Grid.Column="1"
