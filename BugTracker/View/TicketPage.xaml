@@ -9,7 +9,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"
-                 Command="{Binding GetStatusCommand}"/>
+                     Command="{Binding GetStatusCommand}"/>
     </ContentPage.ToolbarItems>
 
     <Grid ColumnDefinitions="*,*"
@@ -19,7 +19,8 @@
             <Label Text="{Binding Id, StringFormat='Ticket ID: {0}'}"
                    Style="{StaticResource MediumLabel}"
                    Margin="0,10"/>
-            <Label Text="Description"/>
+            <Label Text="Description" 
+                   Style="{StaticResource MediumLabel}"/>
             <Editor Placeholder="Description of Ticket"
                     Text="{Binding Description}"
                     HeightRequest="100"

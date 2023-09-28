@@ -16,7 +16,9 @@
           ColumnSpacing="10"
           RowDefinitions="*,*">    
         <VerticalStackLayout x:Name="projectInput" Spacing="10">
-            <Label Text="{Binding Id, StringFormat='Project ID: {0}'}"/>
+            <Label Text="{Binding Id, StringFormat='Project ID: {0}'}"
+                   Style="{StaticResource MediumLabel}"
+                   Margin="0,10"/>
             <Label Text="Name"
                    Style="{StaticResource MediumLabel}"/>
             <Editor Placeholder="Name of Project"

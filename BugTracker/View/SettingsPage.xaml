@@ -11,5 +11,11 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label Text="Dark Mode"
+               Style="{StaticResource MediumLabel}"/>
+        <Switch IsToggled="False"
+                Toggled="Switch_Toggled"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                ThumbColor="{AppThemeBinding Light={StaticResource Accent}, Dark={StaticResource DarkAccent}}"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -9,13 +9,13 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Color x:Key="Primary">lightblue</Color>
+            <Color x:Key="Primary">lightgreen   </Color>
             <Color x:Key="PrimaryDark">Teal</Color>
 
             <Color x:Key="Accent">darkorange</Color>
             <Color x:Key="DarkAccent">lightgreen</Color>
 
-            <Color x:Key="LightBackground">white</Color>
+            <Color x:Key="LightBackground">LightGrey</Color>
             <Color x:Key="DarkBackground">Black</Color>
 
             <Color x:Key="LightText">Black</Color>
@@ -29,6 +29,7 @@
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}" />
                 <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
                 <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource LightText}, Dark={StaticResource DarkText}}"/>
+                
             </Style>
             
             <Style TargetType="Label" x:Key="BaseLabel">
@@ -63,7 +64,7 @@
             <Style x:Key="ButtonOutline" TargetType="Button">
                 <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightText}, Dark={StaticResource DarkText}}" />
-                <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource DarkAccent}}" />
+                <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Accent}, Dark={StaticResource DarkAccent}}" />
                 <Setter Property="BorderWidth" Value="2" />
                 <Setter Property="HeightRequest" Value="40" />
                 <Setter Property="CornerRadius" Value="20" />

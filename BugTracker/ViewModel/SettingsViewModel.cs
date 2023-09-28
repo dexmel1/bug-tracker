@@ -19,5 +19,8 @@ namespace BugTracker.ViewModel
             this.bugService = bugService;
 
         }
+
+
+        
     }
 }
